@@ -3,7 +3,6 @@ import { ClerkProvider, SignInButton, SignUpButton, SignedIn, SignedOut, UserBut
 
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import type { AppProps } from "next/app";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,19 +21,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  Component,
-  pageProps,
 }: Readonly<{
   children: React.ReactNode;
-  Component: AppProps["Component"];
-  pageProps: AppProps["pageProps"];
 }>) {
   return (
-    <ClerkProvider
-      {...pageProps}
-      appearance={{
-        cssLayerName: "clerk"
-      }}>
+    <ClerkProvider appearance={{
+      cssLayerName: "clerk"
+    }}>
       <html lang="en">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -48,7 +41,6 @@ export default function RootLayout({
             </SignedOut>
             <SignedIn>
               <UserButton />
-              <Component {...pageProps} />
             </SignedIn>
           </header>
           {children}
